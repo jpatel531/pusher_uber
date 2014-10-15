@@ -1,5 +1,24 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+
+  div(ng-controller="AppCtrl")
+
+    div
+      h1 Nearest Cabs
+      div(ng-repeat="cab in cabsByTime")
+        h3 {{cab.localized_display_name}}
+        h4 {{ cab.estimate | secondsToMinutes}} away
+
+    div
+      label Where do you wanna go?
+      input(ng-model="destination", ng-keydown="submit($event)")
+
+    div
+      h1 Estimated Prices
+      div(ng-repeat="cab in cabsByPrice")
+        h3 {{cab.localized_display_name}}
+        h4 {{cab.estimate}}
+        h5 {{cab.duration | secondsToMinutes}}
+        p {{cab.distance}} miles away
+        p Surge Multiplier: {{cab.surge_multiplier}}

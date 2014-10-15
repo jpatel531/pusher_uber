@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var api = require('./routes/api')
+var api = require('./routes/api');
 
 var app = express();
 
@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 app.use('/', routes);
 app.use('/users', users);
@@ -60,11 +61,11 @@ app.use(function(err, req, res, next) {
 
 // Uber
 
-var uber = require('./config/uberConfig');
+// var uber = require('./config/uberConfig');
 
 // uber.estimates.price({start_latitude:51.52849, start_longitude:-0.08473, end_latitude:51.507351, end_longitude: -0.12327}, console.log)
 
-uber.estimates.time({start_latitude:51.52849, start_longitude:-0.08473}, console.log)
+// uber.estimates.time({start_latitude:51.52849, start_longitude:-0.08473}, console.log)
 
 
 module.exports = app;
