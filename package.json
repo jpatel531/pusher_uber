@@ -14,6 +14,8 @@
     "morgan": "~1.3.0",
     "node-uber": "0.0.4",
     "pusher": "^1.0.1",
+    "querystring": "^0.2.0",
+    "request": "^2.45.0",
     "serve-favicon": "~2.1.3",
     "underscore": "^1.7.0"
   }

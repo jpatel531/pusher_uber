@@ -2,23 +2,46 @@ extends layout
 
 block content
 
-  div(ng-controller="AppCtrl")
+  .container(ng-controller="AppCtrl")
 
-    div
-      h1 Nearest Cabs
-      div(ng-repeat="cab in cabsByTime")
-        h3 {{cab.localized_display_name}}
-        h4 {{ cab.estimate | secondsToMinutes}} away
+    .row(ng-show="showInput")
+        .col-md-3
+        .col-md-6
+          label Where do you wanna go?
+          input(ng-model="destination", ng-keydown="submit($event)")
+        .col-md-3
 
-    div
-      label Where do you wanna go?
-      input(ng-model="destination", ng-keydown="submit($event)")
+    .row
 
-    div
-      h1 Estimated Prices
-      div(ng-repeat="cab in cabsByPrice")
-        h3 {{cab.localized_display_name}}
-        h4 {{cab.estimate}}
-        h5 {{cab.duration | secondsToMinutes}}
-        p {{cab.distance}} miles away
-        p Surge Multiplier: {{cab.surge_multiplier}}
+      .col-md-6
+
+        h1.text-center Uber
+
+        div
+          h3 Nearest Cabs
+          div(ng-repeat="cab in cabsByTime")
+            h4 {{cab.localized_display_name}}
+            p {{ cab.estimate | secondsToMinutes}} away
+
+
+
+        div
+          h3 Estimated Prices
+          div(ng-repeat="cab in cabsByPrice")
+            h3 {{cab.localized_display_name}}
+            h4 {{cab.estimate}}
+            h5 {{cab.duration | secondsToMinutes}}
+            p {{cab.distance}} miles away
+            p Surge Multiplier: {{cab.surge_multiplier}}
+
+      .col-md-6
+
+        h1.text-center TFL
+
+        div(ng-repeat="journey in tflJourneys")
+          p Duration: {{journey.duration}} minutes
+          p Leave At: {{journey.startDateTime | date:'mediumTime'}}
+          p Arrive At: {{journey.arrivalDateTime | date:'mediumTime'}}
+          p(ng-repeat="instruction in journey.instructions") {{instruction[0]}} / {{instruction[1]}}
+          //- p {{journey.instructions[0]}} / {{journey.instructions[1]}}
+
